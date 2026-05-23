@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chanuk Jeong | Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Poppins', sans-serif; }
+        body { 
+            background: linear-gradient(135deg, #0f0e1e 0%, #1a1a2e 100%);
+            color: #8892b0;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { color: #ccd6f6; font-weight: 700; }
+        .text-accent { color: #64ffda; }
+        .text-accent-blue { color: #64b5f6; }
+        a { color: #64ffda; text-decoration: none; transition: all 0.3s ease; }
+        a:hover { color: #fff; }
+        
+        nav {
+            background: rgba(15, 14, 30, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            color: #ccd6f6;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 50px;
+            height: 1px;
+            background: #64ffda;
+        }
+        
+        .job-entry {
+            border-left: 2px solid #64ffda;
+            padding: 0 0 40px 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .job-entry::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            background: #64ffda;
+            border-radius: 50%;
+        }
+        
+        .job-role {
+            color: #ccd6f6;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .job-company {
+            color: #64ffda;
+            font-weight: 600;
+        }
+        
+        .job-date {
+            color: #495670;
+            font-size: 14px;
+            margin-bottom: 15px;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .job-description {
+            color: #8892b0;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .tech-tag {
+            background: rgba(100, 255, 218, 0.1);
+            border: 1px solid rgba(100, 255, 218, 0.3);
+            color: #64ffda;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+        }
+        
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            background: rgba(30, 30, 46, 0.5);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 8px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-card:hover {
+            border-color: #64ffda;
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(100, 255, 218, 0.1);
+        }
+        
+        .project-icon {
+            font-size: 32px;
+            color: #64ffda;
+            margin-bottom: 15px;
+        }
+        
+        .project-title {
+            color: #ccd6f6;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .project-description {
+            color: #8892b0;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        
+        .project-link {
+            color: #64ffda;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 80px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-intro {
+            color: #64ffda;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .hero-description {
+            max-width: 550px;
+            font-size: 18px;
+            color: #8892b0;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: 2px solid #64ffda;
+            border-radius: 4px;
+            color: #64ffda;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+        }
+        
+        .btn:hover {
+            background: rgba(100, 255, 218, 0.1);
+            transform: translateX(5px);
+        }
+        
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 40px;
+        }
+        
+        @media (max-width: 768px) {
+            section { padding: 60px 20px; }
+            .section-title { font-size: 24px; }
+            .hero h1 { font-size: 40px; }
+        }
+        
+        footer {
+            border-top: 1px solid rgba(100, 255, 218, 0.1);
+            text-align: center;
+            padding: 40px;
+            color: #495670;
+            font-size: 14px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        
+        .social-links a:hover {
+            color: #64ffda;
+            transform: translateY(-3px);
+        }
+        
+        .about-highlight {
+            color: #64ffda;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full">
+        <div class="max-w-7xl mx-auto px-6 py-6 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-accent">cj</a>
+            <div class="hidden md:flex gap-10 text-sm font-medium">
+                <a href="#about" class="hover:text-accent">About</a>
+                <a href="#experience" class="hover:text-accent">Experience</a>
+                <a href="#projects" class="hover:text-accent">Projects</a>
+                <a href="#contact" class="hover:text-accent">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="hero-intro"><span class="text-accent">&lt;</span> Hello! I'm <span class="text-accent">/&gt;</span></h2>
+            <h1>
+                Chanuk Jeong<span class="text-accent">.</span>
+            </h1>
+            <p class="hero-description">
+                I'm a full-stack developer passionate about building intelligent systems and data-driven solutions. 
+                I combine expertise in <span class="about-highlight">AI/ML</span>, <span class="about-highlight">backend architecture</span>, 
+                and <span class="about-highlight">frontend engineering</span> to create products that matter.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn">
+                    <span>View My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="mailto:chanuk@example.com" class="btn">
+                    <i class="fas fa-envelope"></i>
+                    <span>Get In Touch</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-title">
+                About
+            </div>
+            <div class="max-w-3xl">
+                <p style="margin-bottom: 20px;">
+                    I'm a developer with a passion for <span class="about-highlight">solving complex problems</span> 
+                    using modern technology. With experience across AI/ML, backend systems, and cloud infrastructure, 
+                    I take pride in crafting solutions that are not just functional but scalable and user-centric.
+                </p>
+                <p style="margin-bottom: 20px;">
+                    My journey spans from <span class="about-highlight">machine learning</span> and data engineering 
+                    to <span class="about-highlight">full-stack development</span>. I've worked on projects ranging from 
+                    LLM-powered applications to real-time data pipelines, always focusing on creating value and impact.
+                </p>
+                <p>
+                    When I'm not coding, you'll find me exploring new AI frameworks, contributing to open source, 
+                    or thinking about the intersection of technology and human experience.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-title">
+                Experience
+            </div>
+            
+            <div class="job-entry">
+                <div class="job-role">Senior Full-Stack Developer</div>
+                <div class="job-company">TechCorp Solutions</div>
+                <div class="job-date">2023 — Present</div>
+                <div class="job-description">
+                    Lead development of AI-driven applications and real-time data processing systems. 
+                    Architect microservices infrastructure and mentor junior developers in best practices.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">AWS</span>
+                    <span class="tech-tag">Docker</span>
+                </div>
+            </div>
+
+            <div class="job-entry">
+                <div class="job-role">Full-Stack Engineer</div>
+                <div class="job-company">DataFlow AI</div>
+                <div class="job-date">2021 — 2023</div>
+                <div class="job-description">
+                    Developed LLM-powered applications and built real-time analytics platforms. 
+                    Improved system performance by 40% through optimization and refactoring.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">LangChain</span>
+                    <span class="tech-tag">Express.js</span>
+                    <span class="tech-tag">PostgreSQL</span>
+                    <span class="tech-tag">React</span>
+                </div>
+            </div>
+
+            <div class="job-entry">
+                <div class="job-role">Backend Developer</div>
+                <div class="job-company">StartupXYZ</div>
+                <div class="job-date">2019 — 2021</div>
+                <div class="job-description">
+                    Built RESTful APIs and microservices. Implemented CI/CD pipelines and 
+                    containerized applications using Docker and Kubernetes.
+                </div>
+                <div class="tech-tags">
+                    <span class="tech-tag">Node.js</span>
+                    <span class="tech-tag">MongoDB</span>
+                    <span class="tech-tag">Docker</span>
+                    <span class="tech-tag">GraphQL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="section-title">
+                Projects
+            </div>
+            
+            <div class="project-grid">
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="project-title">AI Resume Analyzer</div>
+                    <div class="project-description">
+                        Intelligent resume analysis tool powered by LLMs. 
+                        Provides real-time feedback and improvement suggestions using advanced prompt engineering.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-chart-area"></i>
+                    </div>
+                    <div class="project-title">Real-time Data Pipeline</div>
+                    <div class="project-description">
+                        High-performance data pipeline handling millions of events. 
+                        Built with AWS, Docker, and microservices architecture.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="project-title">Vector DB Integration</div>
+                    <div class="project-description">
+                        Semantic search system using vector embeddings. 
+                        Optimized for scalability with efficient similarity search algorithms.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="project-title">Full-Stack Web App</div>
+                    <div class="project-description">
+                        Modern web application with React frontend and Node.js backend. 
+                        Features authentication, real-time updates, and responsive design.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="project-title">ML Model Deployment</div>
+                    <div class="project-description">
+                        Deployed machine learning models to production using AWS SageMaker. 
+                        Built monitoring and A/B testing infrastructure.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="project-title">CLI Tools & Utilities</div>
+                    <div class="project-description">
+                        Collection of developer tools and CLI utilities built with Python and Node.js. 
+                        Improves workflow efficiency and automation.
+                    </div>
+                    <a href="#" class="project-link">
+                        <i class="fab fa-github"></i>
+                        View Project
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="section-title justify-center">
+                Let's Connect
+            </div>
+            <p class="max-w-2xl mx-auto mb-10" style="font-size: 18px;">
+                I'm always interested in hearing about new projects and opportunities. 
+                Feel free to reach out!
+            </p>
+            <div class="cta-buttons justify-center">
+                <a href="mailto:chanuk@example.com" class="btn">
+                    <i class="fas fa-envelope"></i>
+                    Email Me
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="https://github.com/chanukjeong" target="_blank" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/chanukjeong" target="_blank" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/chanukjeong" target="_blank" title="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+        <p>Built with <span class="text-accent">❤</span> by Chanuk Jeong. © 2026</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.style.borderBottomColor = 'rgba(100, 255, 218, 0.2)';
+                nav.style.backgroundColor = 'rgba(15, 14, 30, 0.95)';
+            } else {
+                nav.style.borderBottomColor = 'rgba(100, 255, 218, 0.1)';
+                nav.style.backgroundColor = 'rgba(15, 14, 30, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
